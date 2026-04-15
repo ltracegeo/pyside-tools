@@ -47,10 +47,31 @@ else()
 endif()
 
 set(TOOLS_PATH "${_qt5Core_install_prefix}/bin")
+set(UIC_PATH "${TOOLS_PATH}/uic${EXE_EXT}")
+set(RCC_PATH "${TOOLS_PATH}/rcc${EXE_EXT}")
+
 if (APPLE)
     set(DESIGNER_PATH "${TOOLS_PATH}/Designer.app")
 else()
     set(DESIGNER_PATH "${TOOLS_PATH}/designer${EXE_EXT}")
+endif()
+
+if (EXISTS ${UIC_PATH})
+    install(FILES "${UIC_PATH}"
+            DESTINATION bin
+            PERMISSIONS
+            OWNER_EXECUTE OWNER_WRITE OWNER_READ
+            GROUP_EXECUTE GROUP_READ
+            WORLD_EXECUTE WORLD_READ)
+endif()
+
+if (EXISTS ${RCC_PATH})
+    install(FILES "${RCC_PATH}"
+            DESTINATION bin
+            PERMISSIONS
+            OWNER_EXECUTE OWNER_WRITE OWNER_READ
+            GROUP_EXECUTE GROUP_READ
+            WORLD_EXECUTE WORLD_READ)
 endif()
 
 if (EXISTS ${DESIGNER_PATH})
